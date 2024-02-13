@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import '../../styles/shared-styles.css';
 import './UpdateUser.css'; // Import the CSS file for styling
 
 const UpdateUser = () => {

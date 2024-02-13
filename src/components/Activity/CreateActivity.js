@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import '../../styles/shared-styles.css';
 
 const CreateActivity = () => {
   const navigate = useNavigate();

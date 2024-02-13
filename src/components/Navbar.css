@@ -1,11 +1,11 @@
-/* Navbar.css */
+
 nav {
     max-width: 100%;
     height: 75px;
-    background-color: #0f707b; /* Change background color as needed */
+    background-color: #0f707b; 
     display: flex;
-    justify-content: center; /* Center the navbar items horizontally */
-    align-items: center; /* Center the navbar items vertically */
+    justify-content: center; 
+    align-items: center; 
 }
   
 nav ul {
@@ -33,7 +33,7 @@ nav li a:hover {
     background-color: #ddd;
 }
 
-/* Dropdown styles */
+
 .dropdown-content {
     display: none;
     position: absolute;

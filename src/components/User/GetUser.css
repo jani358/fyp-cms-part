@@ -1,4 +1,4 @@
-/* GetUser.css */
+
 .get-user-container {
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
     font-size: 16px;
     padding: 5px;
     margin-bottom: 20px;
-    box-sizing: border-box; /* Include padding in width calculation */
+    box-sizing: border-box; 
   }
   
   button {

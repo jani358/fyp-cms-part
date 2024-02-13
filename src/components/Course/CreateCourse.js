@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import '../../styles/shared-styles.css';
 
 const CreateCourse = () => {
   const [courseData, setCourseData] = useState({
