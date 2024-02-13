@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate, Link, Routes, Route } from 'react-router-dom';
+import { useNavigate,  Routes, Route } from 'react-router-dom';
+
+
 import api from '../../services/api';
 
 const CreateJobAlert = () => {

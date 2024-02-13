@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 const CreateMotivationalTip = () => {
