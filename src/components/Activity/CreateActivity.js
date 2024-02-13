@@ -19,7 +19,7 @@ const CreateActivity = () => {
       
       navigate('/get-user'); 
     } catch (error) {
-      console.error('Error creating activity:', error);
+      console.error('Error activity:', error);
     }
   };
 
