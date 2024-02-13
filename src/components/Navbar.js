@@ -1,8 +1,6 @@
-// Navbar.js
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'; // Import the CSS file for styling
-
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 const Navbar = () => {
   return (
     <nav>
@@ -27,21 +25,18 @@ const Navbar = () => {
           <a href="#get">Get</a>
           <div className="dropdown-content">
             <Link to="/get-user">User</Link>
-            {/* Add other get links here */}
           </div>
         </li>
         <li className="dropdown">
           <a href="#update">Update</a>
           <div className="dropdown-content">
             <Link to="/update-user">User</Link>
-            {/* Add other update links here */}
           </div>
         </li>
         <li className="dropdown">
           <a href="#delete">Delete</a>
           <div className="dropdown-content">
             <Link to="/delete-user">User</Link>
-            {/* Add other delete links here */}
           </div>
         </li>
       </ul>
