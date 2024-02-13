@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import '../../styles/shared-styles.css';
+import './GetUser.css'; // Import the CSS file for styling
 
 const GetUser = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const GetUser = () => {
   };
 
   return (
-    <div>
+    <div className="delete-user-container"> {/* Apply delete-user-container class */}
       <h2>Get User by ID</h2>
       <label>
         User ID:

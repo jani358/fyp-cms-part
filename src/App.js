@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar'; // Import Navbar component
 import Home from './components/Home';
 import CreateUser from './components/User/CreateUser';
 import GetUser from './components/User/GetUser';
@@ -16,6 +17,7 @@ import CreateAccMaintain from './components/AccMaintain/CreateAccMaintain';
 function App() {
   return (
     <Router>
+      <Navbar /> {/* Render Navbar */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create-user" element={<CreateUser />} />

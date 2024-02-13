@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import '../../styles/shared-styles.css';
+import './UpdateUser.css'; // Import the CSS file for styling
 
 const UpdateUser = () => {
-  const navigate = useNavigate();  // Change to useNavigate
+  const navigate = useNavigate();
   const [userId, setUserId] = useState('');
   const [updatedUserData, setUpdatedUserData] = useState({
     username: '',
@@ -16,15 +17,14 @@ const UpdateUser = () => {
       const response = await api.put(`/users/${userId}`, updatedUserData);
       console.log(response.data);
 
-      // Redirect to another route after successful update
-      navigate('/get-user'); // Use navigate instead of history.push
+      navigate('/get-user'); // Redirect to another route after successful update
     } catch (error) {
       console.error('Error updating user:', error);
     }
   };
 
   return (
-    <div>
+    <div className="update-user-container">
       <h2>Update User by ID</h2>
       <label>
         User ID:

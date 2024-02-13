@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import '../../styles/shared-styles.css';
+import './DeleteUser.css'; // Import the CSS file for styling
 
 const DeleteUser = () => {
-  const navigate = useNavigate();  // Use useNavigate instead of useHistory
+  const navigate = useNavigate();
 
   const [userId, setUserId] = useState('');
 
@@ -14,14 +15,14 @@ const DeleteUser = () => {
       console.log(response.data);
 
       // Redirect to another route after successful deletion
-      navigate('/get-user'); // Use navigate instead of history.push
+      navigate('/get-user');
     } catch (error) {
       console.error('Error deleting user:', error);
     }
   };
 
   return (
-    <div>
+    <div className="delete-user-container">
       <h2>Delete User by ID</h2>
       <label>
         User ID:

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import '../../styles/shared-styles.css';
+import './CreateUser.css'; // Import the CSS file for styling
 
 const CreateUser = () => {
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ const CreateUser = () => {
         createdAt: null,
       });
 
-     
       navigate('/get-user');
     } catch (error) {
       console.error('Error creating user:', error);
@@ -34,47 +34,47 @@ const CreateUser = () => {
   };
 
   return (
-    <div>
+    <div className="create-user-container">
       <h2>Create User</h2>
       <form>
-        <label>
-          ID:
+        <div className="form-group">
+          <label htmlFor="id">ID:</label>
           <input
             type="number"
+            id="id"
             value={userData.id || ''}
             onChange={(e) => setUserData({ ...userData, id: e.target.value })}
             disabled
           />
-        </label>
-        <br />
-        <label>
-          Username:
+        </div>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             value={userData.username}
             onChange={(e) => setUserData({ ...userData, username: e.target.value })}
           />
-        </label>
-        <br />
-        <label>
-          Password:
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={userData.password}
             onChange={(e) => setUserData({ ...userData, password: e.target.value })}
           />
-        </label>
-        <br />
-        <label>
-          Created At:
+        </div>
+        <div className="form-group">
+          <label htmlFor="createdAt">Created At:</label>
           <input
             type="text"
+            id="createdAt"
             value={userData.createdAt || ''}
             onChange={(e) => setUserData({ ...userData, createdAt: e.target.value })}
             disabled
           />
-        </label>
-        <br />
+        </div>
         <button type="button" onClick={handleCreateUser}>
           Create User
         </button>
@@ -82,7 +82,6 @@ const CreateUser = () => {
 
       <Link to="/get-user">Go to Get User</Link>
 
-   
       <Routes>
         <Route path="/get-user" element={<GetUser />} />
       </Routes>
