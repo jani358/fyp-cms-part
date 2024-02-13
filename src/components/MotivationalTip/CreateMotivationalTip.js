@@ -15,8 +15,8 @@ const CreateMotivationalTip = () => {
       const response = await api.post('/motivational-tips', motivationalTipData);
       console.log(response.data);
 
-      // Redirect to another route after successful creation
-      navigate('/get-motivational-tip'); // Adjust the route as needed
+      
+      navigate('/get-motivational-tip'); 
     } catch (error) {
       console.error('Error creating motivational tip:', error);
     }
@@ -57,10 +57,10 @@ const CreateMotivationalTip = () => {
         </button>
       </form>
 
-      {/* Add a Link to navigate back */}
-      <Link to="/get-motivational-tip">Go to Get Motivational Tip</Link>
+      
+      {/* <Link to="/get-motivational-tip">Go to Get Motivational Tip</Link> */}
 
-      {/* Define the route for Get Motivational Tip */}
+      
       <Routes>
         <Route path="/get-motivational-tip" element={<GetMotivationalTip />} />
       </Routes>
@@ -70,8 +70,8 @@ const CreateMotivationalTip = () => {
 
 export default CreateMotivationalTip;
 
-// Add the GetMotivationalTip component here
+
 const GetMotivationalTip = () => {
-  // Implement the GetMotivationalTip component logic here
+ 
   return <div>GetMotivationalTip component content</div>;
 };

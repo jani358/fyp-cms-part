@@ -15,8 +15,8 @@ const CreateTutorial = () => {
       const response = await api.post('/tutorials', tutorialData);
       console.log(response.data);
 
-      // Redirect to another route after successful creation
-      navigate('/get-tutorial'); // Adjust the route as needed
+
+      navigate('/get-tutorial'); 
     } catch (error) {
       console.error('Error creating tutorial:', error);
     }
@@ -57,10 +57,9 @@ const CreateTutorial = () => {
         </button>
       </form>
 
-      {/* Add a Link to navigate back */}
-      <Link to="/get-tutorial">Go to Get Tutorial</Link>
+    
+      {/* <Link to="/get-tutorial">Go to Get Tutorial</Link> */}
 
-      {/* Define the route for Get Tutorial */}
       <Routes>
         <Route path="/get-tutorial" element={<GetTutorial />} />
       </Routes>
@@ -70,8 +69,8 @@ const CreateTutorial = () => {
 
 export default CreateTutorial;
 
-// Add the GetTutorial component here
+
 const GetTutorial = () => {
-  // Implement the GetTutorial component logic here
+  
   return <div>GetTutorial component content</div>;
 };

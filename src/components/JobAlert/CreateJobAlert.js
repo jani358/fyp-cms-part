@@ -15,8 +15,8 @@ const CreateJobAlert = () => {
       const response = await api.post('/job-alerts', jobAlertData);
       console.log(response.data);
 
-      // Redirect to another route after successful creation
-      navigate('/get-job-alert'); // Adjust the route as needed
+      
+      navigate('/get-job-alert'); 
     } catch (error) {
       console.error('Error creating job alert:', error);
     }
@@ -58,10 +58,10 @@ const CreateJobAlert = () => {
         </button>
       </form>
 
-      {/* Add a Link to navigate back or to the job alerts list */}
-      <Link to="/get-job-alert">Go to Get Job Alert</Link>
+      
+      {/* <Link to="/get-job-alert">Go to Get Job Alert</Link> */}
 
-      {/* Define the route for Get Job Alert */}
+      
       <Routes>
         <Route path="/get-job-alert" element={<GetJobAlert />} />
       </Routes>
@@ -71,8 +71,7 @@ const CreateJobAlert = () => {
 
 export default CreateJobAlert;
 
-// Add the GetJobAlert component here
 const GetJobAlert = () => {
-  // Implement the GetJobAlert component logic here
+ 
   return <div>GetJobAlert component content</div>;
 };
