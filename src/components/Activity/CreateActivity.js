@@ -16,8 +16,8 @@ const CreateActivity = () => {
       const response = await api.post('/activities', activityData);
       console.log(response.data);
 
-      // Redirect to another route after successful creation
-      navigate('/get-user'); // Adjust the route as needed
+      
+      navigate('/get-user'); 
     } catch (error) {
       console.error('Error creating activity:', error);
     }
