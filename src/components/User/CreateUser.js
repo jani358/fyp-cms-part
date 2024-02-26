@@ -1,97 +1,130 @@
-import React, { useState } from 'react';
-import { Link, Routes, Route, useNavigate } from 'react-router-dom';
-import api from '../../services/api';
-import './CreateUser.css'; // Import the CSS file for styling
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const CreateUser = () => {
-  const navigate = useNavigate();
+function UserManagement() {
+  const [users, setUsers] = useState([]);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [editingUserId, setEditingUserId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const [userData, setUserData] = useState({
-    id: null,
-    username: '',
-    password: '',
-    createdAt: null,
-  });
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    try {
+      const response = await axios.get('http://localhost:3002/users');
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
 
   const handleCreateUser = async () => {
     try {
-      console.log(userData); // Log the user data
-      const response = await api.post('/users', userData);
-      console.log(response.data);
-
-      setUserData({
-        id: null,
-        username: '',
-        password: '',
-        createdAt: null,
+      const response = await axios.post('http://localhost:3002/users', {
+        username: username,
+        password: password,
       });
-
-      navigate('/get-user');
+      console.log(response.data); 
+      setUsers([...users, response.data]); 
+      setUsername('');
+      setPassword('');
     } catch (error) {
-      console.error('Error creating user:', error);
+      handleRequestError(error);
+    }
+  };
+
+  const handleUpdateUser = async (userId) => {
+    try {
+      const response = await axios.put(`http://localhost:3002/users/${userId}`, {
+        username: username,
+        password: password,
+      });
+      console.log(response.data); 
+      setUsers(users.map((user) => (user.id === userId ? response.data : user)));
+      setUsername('');
+      setPassword('');
+      setEditingUserId(null);
+    } catch (error) {
+      handleRequestError(error);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:3002/users/${userId}`);
+      setUsers(users.filter((user) => user.id !== userId));
+    } catch (error) {
+      handleRequestError(error);
+    }
+  };
+
+  const handleEditUser = (user) => {
+    setUsername(user.username);
+    setPassword(user.password);
+    setEditingUserId(user.id);
+  };
+
+  const handleCancelEdit = () => {
+    setUsername('');
+    setPassword('');
+    setEditingUserId(null);
+  };
+
+  const handleRequestError = (error) => {
+    if (error.response && error.response.data && error.response.data.message) {
+      setErrorMessage(error.response.data.message);
+    } else {
+      setErrorMessage('An error occurred. Please try again.');
     }
   };
 
   return (
-    <div className="create-user-container">
+    <div>
+      <h1>User Management</h1>
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <h2>Create User</h2>
-      <form>
-        <div className="form-group">
-          <label htmlFor="id">ID:</label>
-          <input
-            type="number"
-            id="id"
-            value={userData.id || ''}
-            onChange={(e) => setUserData({ ...userData, id: e.target.value })}
-            disabled
-          />
+      <label>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <br />
+      {editingUserId ? (
+        <div>
+          <button onClick={() => handleUpdateUser(editingUserId)}>Update User</button>
+          <button onClick={handleCancelEdit}>Cancel</button>
         </div>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={userData.username}
-            onChange={(e) => setUserData({ ...userData, username: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={userData.password}
-            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="createdAt">Created At:</label>
-          <input
-            type="text"
-            id="createdAt"
-            value={userData.createdAt || ''}
-            onChange={(e) => setUserData({ ...userData, createdAt: e.target.value })}
-            disabled
-          />
-        </div>
-        <button type="button" onClick={handleCreateUser}>
-          Create User
-        </button>
-      </form>
-
-      <Link to="/get-user">Go to Get User</Link>
-
-      <Routes>
-        <Route path="/get-user" element={<GetUser />} />
-      </Routes>
+      ) : (
+        <button onClick={handleCreateUser}>Create User</button>
+      )}
+      <hr />
+      <h2>Users</h2>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            {user.username} -{' '}
+            <button onClick={() => handleEditUser(user)}>Edit</button>{' '}
+            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
-export default CreateUser;
-
-// Add the GetUser component here
-const GetUser = () => {
-  // Implement the GetUser component logic here
-  return <div>GetUser component content</div>;
-};
+export default UserManagement;

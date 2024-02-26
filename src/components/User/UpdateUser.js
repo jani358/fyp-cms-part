@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import './UpdateUser.css'; // Import the CSS file for styling
+import './UpdateUser.css'; 
 
 const UpdateUser = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const UpdateUser = () => {
       const response = await api.put(`/users/${userId}`, updatedUserData);
       console.log(response.data);
 
-      navigate('/get-user'); // Redirect to another route after successful update
+      navigate('/get-user'); 
     } catch (error) {
       console.error('Error updating user:', error);
     }

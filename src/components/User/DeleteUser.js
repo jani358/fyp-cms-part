@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import './DeleteUser.css'; // Import the CSS file for styling
+import './DeleteUser.css'; 
 
 const DeleteUser = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const DeleteUser = () => {
       const response = await api.delete(`/users/${userId}`);
       console.log(response.data);
 
-      // Redirect to another route after successful deletion
+      
       navigate('/get-user');
     } catch (error) {
       console.error('Error deleting user:', error);

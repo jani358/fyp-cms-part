@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import './GetUser.css'; // Import the CSS file for styling
+import './GetUser.css'; 
 
 const GetUser = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const GetUser = () => {
   };
 
   const handleGoBack = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate(-1); 
   };
 
   return (
