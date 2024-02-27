@@ -73,64 +73,101 @@ function CreateCourse() {
   };
 
   return (
-    <div>
-      <h2>Create/Update Course</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
+    <div className="max-w-4xl mx-auto py-8">
+      <h2 className="text-2xl font-bold mb-4">Create/Update Course</h2>
+      <form onSubmit={handleSubmit} className="mb-8">
+        <div className="mb-4">
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            Title:
+          </label>
           <input
             type="text"
+            id="title"
             name="title"
             value={formData.title}
             onChange={handleChange}
             required
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label>Image URL:</label>
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+            Image URL:
+          </label>
           <input
             type="text"
+            id="image"
             name="image"
             value={formData.image}
             onChange={handleChange}
             required
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label>Description:</label>
+        <div className="mb-4">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            Description:
+          </label>
           <textarea
+            id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
             required
+            rows="4"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label>Category:</label>
+        <div className="mb-4">
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+            Category:
+          </label>
           <input
             type="number"
+            id="category"
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-        <button type="submit">{editingCourseId ? 'Update Course' : 'Create Course'}</button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          {editingCourseId ? 'Update Course' : 'Create Course'}
+        </button>
       </form>
 
-      <h2>Courses</h2>
+      <h2 className="text-2xl font-bold mb-4">Courses</h2>
       <ul>
         {courses.map((course) => (
-          <li key={course.id}>
+          <li key={course.id} className="mb-4">
             <div>
               <strong>{course.title}</strong> - {course.description}
             </div>
             <div>
-              <img src={course.image} alt={course.title} style={{ width: '100px' }} />
+              <img
+                src={course.image}
+                alt={course.title}
+                style={{ width: '100px' }}
+                className="mt-2"
+              />
             </div>
-            <div>
-              <button onClick={() => handleEdit(course)}>Edit</button>
-              <button onClick={() => handleDelete(course.id)}>Delete</button>
+            <div className="mt-2">
+              <button
+                onClick={() => handleEdit(course)}
+                className="mr-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(course.id)}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Delete
+              </button>
             </div>
           </li>
         ))}

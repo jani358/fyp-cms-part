@@ -1,130 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-function UserManagement() {
-  const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [editingUserId, setEditingUserId] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = async () => {
-    try {
-      const response = await axios.get('http://localhost:3002/users');
-      setUsers(response.data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
+function CreateUser() {
+  const [createdUser, setCreatedUser] = useState(null);
+  const [userData, setUserData] = useState({ username: '', password: '' });
 
   const handleCreateUser = async () => {
     try {
-      const response = await axios.post('http://localhost:3002/users', {
-        username: username,
-        password: password,
-      });
-      console.log(response.data); 
-      setUsers([...users, response.data]); 
-      setUsername('');
-      setPassword('');
+      const response = await axios.post('http://localhost:3000/users', userData);
+      setCreatedUser(response.data);
     } catch (error) {
-      handleRequestError(error);
+      console.error('Error creating user:', error);
     }
   };
 
-  const handleUpdateUser = async (userId) => {
-    try {
-      const response = await axios.put(`http://localhost:3002/users/${userId}`, {
-        username: username,
-        password: password,
-      });
-      console.log(response.data); 
-      setUsers(users.map((user) => (user.id === userId ? response.data : user)));
-      setUsername('');
-      setPassword('');
-      setEditingUserId(null);
-    } catch (error) {
-      handleRequestError(error);
-    }
-  };
-
-  const handleDeleteUser = async (userId) => {
-    try {
-      await axios.delete(`http://localhost:3002/users/${userId}`);
-      setUsers(users.filter((user) => user.id !== userId));
-    } catch (error) {
-      handleRequestError(error);
-    }
-  };
-
-  const handleEditUser = (user) => {
-    setUsername(user.username);
-    setPassword(user.password);
-    setEditingUserId(user.id);
-  };
-
-  const handleCancelEdit = () => {
-    setUsername('');
-    setPassword('');
-    setEditingUserId(null);
-  };
-
-  const handleRequestError = (error) => {
-    if (error.response && error.response.data && error.response.data.message) {
-      setErrorMessage(error.response.data.message);
-    } else {
-      setErrorMessage('An error occurred. Please try again.');
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
   };
 
   return (
-    <div>
-      <h1>User Management</h1>
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      <h2>Create User</h2>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <br />
-      {editingUserId ? (
-        <div>
-          <button onClick={() => handleUpdateUser(editingUserId)}>Update User</button>
-          <button onClick={handleCancelEdit}>Cancel</button>
+    <div className="max-w-md mx-auto py-8">
+      <h2 className="text-2xl font-bold mb-4">Create New User</h2>
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        value={userData.username}
+        onChange={handleInputChange}
+        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-4"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        value={userData.password}
+        onChange={handleInputChange}
+        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-4"
+      />
+      <button
+        onClick={handleCreateUser}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Create User
+      </button>
+      {createdUser && (
+        <div className="mt-4">
+          <h3 className="text-lg font-bold mb-2">User Created</h3>
+          <p><span className="font-semibold">ID:</span> {createdUser.id}</p>
+          <p><span className="font-semibold">Username:</span> {createdUser.username}</p>
+          <p><span className="font-semibold">Password:</span> {createdUser.password}</p>
         </div>
-      ) : (
-        <button onClick={handleCreateUser}>Create User</button>
       )}
-      <hr />
-      <h2>Users</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>
-            {user.username} -{' '}
-            <button onClick={() => handleEditUser(user)}>Edit</button>{' '}
-            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
-export default UserManagement;
+export default CreateUser;

@@ -1,42 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
+    <nav className="bg-gray-800 p-4">
+      <ul className="flex justify-between">
+        <li className="mr-6">
+          <Link to="/" className="text-white hover:text-gray-300">
+            Home
+          </Link>
         </li>
-        <li className="dropdown">
-          <a href="#create">Create</a>
-          <div className="dropdown-content">
-            <Link to="/create-user">User</Link>
-            <Link to="/create-tutorial">Tutorial</Link>
-            <Link to="/create-motivational-tip">Motivational Tip</Link>
-            <Link to="/create-job-alert">Job Alert</Link>
-            <Link to="/create-course">Course</Link>
-            <Link to="/create-category">Category</Link>
-            <Link to="/create-activity">Activity</Link>
-            <Link to="/create-acc-maintain">Account Maintenance</Link>
-          </div>
-        </li>
-        <li className="dropdown">
-          <a href="#get">Get</a>
-          <div className="dropdown-content">
-            <Link to="/get-user">User</Link>
-          </div>
-        </li>
-        <li className="dropdown">
-          <a href="#update">Update</a>
-          <div className="dropdown-content">
-            <Link to="/update-user">User</Link>
-          </div>
-        </li>
-        <li className="dropdown">
-          <a href="#delete">Delete</a>
-          <div className="dropdown-content">
-            <Link to="/delete-user">User</Link>
+        <li className="dropdown relative">
+          <a href="#create" className="text-white hover:text-gray-300">
+            Create
+          </a>
+          <div className="dropdown-content absolute hidden bg-gray-800 text-white">
+            <Link
+              to="/create-user"
+              className="block py-2 px-4 hover:bg-gray-700"
+            >
+              User
+            </Link>
+            <Link
+              to="/create-tutorial"
+              className="block py-2 px-4 hover:bg-gray-700"
+            >
+              Tutorial
+            </Link>
+            <Link
+              to="/create-course"
+              className="block py-2 px-4 hover:bg-gray-700"
+            >
+              Course
+            </Link>
+            <Link
+              to="/create-category"
+              className="block py-2 px-4 hover:bg-gray-700"
+            >
+              Category
+            </Link>
+            <Link
+              to="/create-activity"
+              className="block py-2 px-4 hover:bg-gray-700"
+            >
+              Activity
+            </Link>
           </div>
         </li>
       </ul>
